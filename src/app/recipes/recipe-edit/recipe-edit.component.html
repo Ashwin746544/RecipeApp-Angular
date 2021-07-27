@@ -1,0 +1,47 @@
+
+  <div class="row">
+    <div class="col-xs-12">
+      <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <button [disabled]="!recipeForm.valid" type="submit" class="btn btn-primary" style="margin-right: 7px;">Submit</button>
+        <button type="button" class="btn btn-danger" (click)="onCancel()">cancel</button>
+      </div>
+      <div class="row form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" class="form-control" formControlName="name">
+      </div>
+      <div class="row form-group">
+        <label for="imageurl">ImageUrl</label>
+        <input type="text" id="imageurl" name="imageurl" class="form-control" formControlName="imagePath" #imagePath>
+      </div>
+      <div class="row">
+        <img [src]="imagePath.value" alt="Preview Not Available!" class="img-responsive">
+      </div>
+      <div class="row form-group">
+        <label for="description">Description</label>
+        <textarea name="description" class="form-control" id="description"  rows="6" formControlName="description"></textarea>
+      </div>
+      <div class="col-xs-12" formArrayName="ingredients">
+      <div class="row" *ngFor="let ingredientctrl of ingControls;let i=index"
+      style="margin-top: 10px;">
+      <div class="form-group" [formGroupName]="i">
+        <div class="col-xs-8" style="padding-left: 0px;">
+          <input type="text" class="form-control" formControlName="name">
+        </div>
+        <div class="col-xs-2">
+          <input type="text" class="form-control" formControlName="amount">
+        </div>
+        <div class="col-xs-2">
+          <button class="btn btn-danger" (click)="onDeleteIngredient(i)">X</button>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <button type="button" class="btn btn-success" (click)="onAddIngredient()">Add Ingredient</button>
+    </div>
+      </div>
+    </form>
+    </div>
+  </div>
+
